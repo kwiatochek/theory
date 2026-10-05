@@ -20,6 +20,12 @@
     }
 }
 
+html {
+    font-size: clamp(0.875rem, 0.8rem + 0.4vw, 1.125rem);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
     min-height: 100dvh;
     color: var(--text);
@@ -35,6 +41,16 @@ h1,
 h2 {
     color: var(--accent);
     margin: 0.6em 0 0.4em;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.25rem);
+}
+
+h2 {
+    font-size: clamp(1.15rem, 1rem + 0.9vw, 1.6rem);
+    position: sticky;
+    left: 0;
 }
 
 .content {
@@ -60,6 +76,27 @@ h2 {
     background: var(--head);
 }
 
+pre,
+code {
+    font-size: 1em;
+}
+
+pre {
+    overflow-x: auto;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.td:has(pre) {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0.3em;
+}
+
+.table:has(pre) {
+    grid-template-columns: repeat(var(--cols, 4), minmax(min-content, 1fr));
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -67,25 +104,25 @@ h2 {
              "DejaVu Sans Mono", "Liberation Mono", "Courier New", monospace;
 }
 
-
-
 .article {
     overflow-x: auto;
 }
-
 
 .content, 
 .article, 
 .item {
     width: 100%;
 }
+
 .item {
-    min-width: 400px;
+    min-width: min(400px, 100%);
 }
+
 h1, 
 h2 {
     text-align: center;
 }
+
 .table {
     display: grid;
     grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
@@ -111,7 +148,6 @@ h2 {
     font-weight: bold;
 }
 
-
 .td pre {
     width: 100%;
     min-width: 0;
@@ -120,5 +156,61 @@ h2 {
 }
 
 .text-a-j {
+    display: block;
     text-align: justify;
+}
+
+.table.ex .tch {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    .table {
+        font-size: 0.9em;
+        gap: 0.35em;
+    }
+
+    .t,
+    .trh,
+    .tch,
+    .td {
+        padding: 0.1em 0.3em;
+        overflow-wrap: normal;
+    }
+
+    .table:not(:has(pre)):not(.flip):not(.fit) {
+        grid-template-columns: repeat(var(--cols, 4), minmax(11ch, 1fr));
+        min-width: calc(var(--cols, 4) * 12ch);
+    }
+
+    .table.flip {
+        grid-auto-flow: column;
+        grid-template-rows: repeat(var(--cols, 4), auto);
+        grid-template-columns: auto;
+        grid-auto-columns: minmax(0, 1fr);
+    }
+
+    .table.flip .tch {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .table.fit {
+        grid-template-columns: repeat(var(--cols, 4), auto);
+        width: fit-content;
+        margin: 0.3em auto;
+        padding: 0.7em 0.6em;
+    }
+
+    .td pre {
+        font-size: 0.9em;
+    }
+
+    .table.ex {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
