@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Это база</title>
+    <title>Теория по python</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,162 +11,318 @@
         <div class="content">
             <div class="article">
                 <h1>
-                    ТЕОРИЯ по проге
+                    ТЕОРИЯ по python
                 </h1>
                 <div class="item">
-                    <h2>
-                        Типы данных
-                    </h2>
-                    <div class="table flip" style="--cols: 5">
-                        <div class="t">\</div>
-                        <div class="tch">int</div>
-                        <div class="tch">float</div>
-                        <div class="tch">str</div>
-                        <div class="tch">bool</div>
-                        <div class="trh">
-                            -
+                    <div class="table" style="--cols: 1">
+                        <h2>Синтаксис</h2>
+                        <div class="td mix">
+                            <p>Весь код выполняется построчно с самого левого края
+                                 - сначала первая строка, потом вторая и так далее.
+                            </p>
+                            <p>
+                                Для ограничения блоков кода (if, for и т.д.) используются двоеточия и отступы.
+                            </p>
+                            <p>
+                                Двоеточие - начало блока. Используется после конструкций if/elif/else, for, while, def, в лямбда-выражениях:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>if x &gt; 5:
+    print(x)
+
+for i in range(4):
+    print(i // 2)
+
+while x > 0:
+    x -= 1
+</code></pre>
+                            <p>
+                                Отступы определяют, какие команды относятся к блоку. Обычно отступ - это либо Tab, либо 4 пробела:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>if x &gt; 0:
+    print("Положительное")
+    print("Ещё одна команда")
+
+print("Уже вне if")
+</code></pre>
+<pre tabindex="0" data-lang="Python"><code>if x &gt; 0:
+print("x")    # ошибка, блок не может быть пустым
+</code></pre>
                         </div>
-                        <div class="td">
-                            целое число
+                        <div class="tch">
+                            print()
                         </div>
-                        <div class="td">
-                            дробное число
+                        <div class="td mix">
+                            <p>
+                                print() нужен, чтобы вывести значение:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>print("Привет")
+print(901)
+print(x)</code></pre>
+                            <p>
+                                Вывести несколько значений:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>name = "Вася"
+age = 16
+print(name, age)   # 'Вася' 19</code></pre>
+                            <p>
+                                У print есть 2 значения по умолчанию: sep и end
+                            </p>
+                            <p>sep отвечает за разделитель межу значениями</p>
+<pre tabindex="0" data-lang="Python"><code>print("2026", "06", "08", sep="-")  № 2026-06-08</code></pre>
+                            </p>
+                            <p>end отвечает за то, что будет выведено после print</p>
+<pre tabindex="0" data-lang="Python"><code>print("Привет,", end=" ")
+print("мир")  # Привет, мир</code></pre>
                         </div>
-                        <div class="td">
-                            строка
+                        <div class="tch">
+                            input()
                         </div>
-                        <div class="td">
-                            истина или ложь
+                        <div class="td mix">
+                            <p>
+                                input() нужен, чтобы получить данные от пользователя
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>name = input()
+print(name)</code></pre>
+                            <p>
+                                Также можно с подсказкой: 
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>name = input("Введите имя: ")</code></pre>
+                            <p>
+                                Главный нюанс: input() всегда возвращает str
+                            </p>
                         </div>
-                        
-                        <div class="trh">
-                            Примеры
+                    </div>
+                </div>
+
+                <div class="item">
+                    <h2>Типы данных</h2>
+                    <div class="table" style="--cols: 1">
+                        <div class="td mix">
+                            <p>
+                                Тип данных - не вид переменной, а то, что может храниться 
+                                в этой коробочке с названием.
+                            </p>
+                            <p>
+                                Основные типы данных:
+                            </p>
+                            <ul>
+                                <li>
+                                    int. Обычное целое число
+                                </li>
+                                <li>
+                                    float. Число с дробной частью. Разделитель - точка. Дробная часть может быть равной нулю
+                                </li>
+                                <li>
+                                    str. Строка, последовательность символов, заключенная в кавычки
+                                </li>
+                                <li>
+                                    bool. Всего два значения - True (истина) и False (ложь). Является результатом логических выражений
+                                </li>
+                            </ul>   
+                            
+                            <p>
+                                Чтобы быстро узнать тип переменной, можно воспользоваться встроенной функцией type():
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>a = 10
+print(type(a))   # &lt;class 'int'&gt;
+b = 10.0
+print(type(b))   # &lt;class 'float'&gt;
+c = "10"
+print(type(c))   # &lt;class 'str'&gt;
+d = True
+print(type(d))   # &lt;class 'bool'&gt;</code></pre>
                         </div>
-                        <div class="td">
-                            12 -17 61414
+                        <div class="tch">
+                            Преобразование типов
                         </div>
-                        <div class="td">
-                            3.14 -2.71 0.5
-                        </div>
-                        <div class="td">
-                            "Hello, World!"
-                            "СТРоКа"
-                            "3.14"
-                        </div>
-                        <div class="td">
-                            True False
+                        <div class="td mix">
+                            <p>
+                                Значение одного типа можно преобразовать в другой с помощью специальных функций.
+                                Например, чтобы преобразовать str в int (если данная строка может быть числом):
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>age = "18"  # age будет иметь тип str
+age = int(age)      # преобразуем в число
+print(age + 1)      # 19, ошибки не будет
+</code></pre>
+                            <p>
+                                Пользовательский ввод через input() по умолчанию имеет тип str, 
+                                поэтому для работы с числами надо приводить типы:
+                                <br />
+                                input() -> str -> преобразование -> нужный тип
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>a = input()
+b = input()
+
+print(a + b) # если ввести 2 и 3, то получим '23'
+</code></pre>
+<pre tabindex="0" data-lang="Python"><code>a = int(input())
+b = int(input())
+
+print(a + b) # если ввести 2 и 3, то получим 5
+</code></pre>
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <h2>
-                        Математика
-                    </h2>
+                    <h2>Операторы</h2>
                     <div class="table fit" style="--cols: 4">
-                        <div class="tch">Действие</div>
-                        <div class="tch">Знак</div>
-                        <div class="tch">Выражение</div>
+                        <div class="tch">Оператор</div>
+                        <div class="tch">Что делает</div>
+                        <div class="tch">Пример</div>
                         <div class="tch">Результат</div>
 
-                        <div class="trh">Сложение</div>
-                        <div class="td">+</div>
+                        <div class="trh">+</div>
+                        <div class="td">сложение</div>
                         <div class="td">5 + 2</div>
                         <div class="td">7</div>
 
-                        <div class="trh">Вычитание</div>
-                        <div class="td">-</div>
+                        <div class="trh">-</div>
+                        <div class="td">вычитание</div>
                         <div class="td">5 - 2</div>
                         <div class="td">3</div>
 
-                        <div class="trh">Умножение</div>
-                        <div class="td">*</div>
+                        <div class="trh">*</div>
+                        <div class="td">умножение</div>
                         <div class="td">5 * 2</div>
                         <div class="td">10</div>
 
-                        <div class="trh">Деление</div>
-                        <div class="td">/</div>
+                        <div class="trh">/</div>
+                        <div class="td">обычное деление</div>
                         <div class="td">5 / 2</div>
                         <div class="td">2.5</div>
 
-                        <div class="trh">Деление нацело</div>
-                        <div class="td">//</div>
+                        <div class="trh">//</div>
+                        <div class="td">целая часть от деления</div>
                         <div class="td">5 // 2</div>
                         <div class="td">2</div>
 
-                        <div class="trh">Нахождение остатка</div>
-                        <div class="td">%</div>
+                        <div class="trh">%</div>
+                        <div class="td">нахождение остатка от деления</div>
                         <div class="td">5 % 2</div>
                         <div class="td">1</div>
 
-                        <div class="trh">Возведение в степень</div>
-                        <div class="td">**</div>
+                        <div class="trh">**</div>
+                        <div class="td">возведение в степень</div>
                         <div class="td">5 ** 2</div>
                         <div class="td">25</div>
 
-                        <div class="trh">Сравнение</div>
-                        <div class="td">==</div>
+                        <div class="trh">==</div>
+                        <div class="td">равны ли значения</div>
                         <div class="td">5 == 2</div>
                         <div class="td">False</div>
 
-                        <div class="trh">Не равно</div>
-                        <div class="td">!=</div>
+                        <div class="trh">!=</div>
+                        <div class="td">не равны ли значения</div>
                         <div class="td">5 != 2</div>
                         <div class="td">True</div>
 
-                        <div class="trh">Меньше</div>
-                        <div class="td">&lt;</div>
+                        <div class="trh">&lt;</div>
+                        <div class="td">меньше ли первое второго</div>
                         <div class="td">5 &lt; 2</div>
                         <div class="td">False</div>
 
-                        <div class="trh">Больше</div>
-                        <div class="td">&gt;</div>
+                        <div class="trh">&gt;</div>
+                        <div class="td">больше ли первое второго</div>
                         <div class="td">5 &gt; 2</div>
-                        <div class="td">False</div>
+                        <div class="td">True</div>
 
-                        <div class="trh">Меньше или равно</div>
-                        <div class="td">&lt;=</div>
+                        <div class="trh">&lt;=</div>
+                        <div class="td">меньше первое второго или равно ему</div>
                         <div class="td">5 &lt;= 2</div>
                         <div class="td">False</div>
 
-                        <div class="trh">Больше или равно</div>
-                        <div class="td">&gt;=</div>
+                        <div class="trh">&gt;=</div>
+                        <div class="td">больше первое второго или равно ему</div>
                         <div class="td">5 &gt;= 5</div>
                         <div class="td">True</div>
+
+                        <div class="trh">and</div>
+                        <div class="td">проверяет, что оба операнда равны True</div>
+                        <div class="td">True and False</div>
+                        <div class="td">False</div>
+
+                        <div class="trh">or</div>
+                        <div class="td">проверяет, что хотя бы один операнд равен True</div>
+                        <div class="td">True or False</div>
+                        <div class="td">True</div>
+
+                        <div class="trh">not</div>
+                        <div class="td">Переводит True в False и наоборот</div>
+                        <div class="td">not(True)</div>
+                        <div class="td">False</div>
+                    </div>
+                    <div class="table" style="--cols: 1">
+                        <div class="tch">Приоритет операторов</div>
+                        <div class="td mix">
+                            <ol>
+                                <li>()</li>
+                                <li>**</li>
+                                <li>* / // %</li>
+                                <li>+ -</li>
+                                <li>&lt; &lt;= &gt; &gt;= == !=</li>
+                                <li>not</li>
+                                <li>and</li>
+                                <li>or</li>
+                            </ol>
+                            <p>
+                                Чтобы сохранить нужный порядок, можно использовать скобки
+                            </p>
+                        </div>
+
+                        <div class="td mix">
+                            <p>
+                                P.S.
+                            </p>
+                            <ul>
+                                <li>
+                                    // - не "убрать целую часть". Для отрицательных чисел результат округлится вниз
+                                </li>
+                                <li>
+                                    == - проверка на равенство
+                                </li>
+                                <li>
+                                    != - проверка на неравенство
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="item">
-                    <h2>
-                        Условные операторы
-                    </h2>
-                    <div class="table flip" style="--cols: 4">
-                        <div class="tch">Только if</div>
-                        <div class="tch">if + else</div>
-                        <div class="tch">if + elif</div>
-                        <div class="tch">Все вместе</div>
-                        <div class="td"> 
-<pre tabindex="0" data-lang="Python"> <code>if (условие):
+                    <h2>Условные операторы</h2>
+                    <div class="table" style="--cols: 1">
+                        <div class="td mix">
+                            <p>
+                                Условные конструкции позволяют писать код с ветвлениями, то есть в зависимости от условия выполнять тот или иной код.
+                                Проверка всегда начинается с if - если, после которого идет само логическое выражение (проверка равенства, неравенства, результата булевой функции). 
+                                При истинности условия будет выполнен тот код, который находится в области видимости if'а - блоке if:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>if (условие):
     &lt; код &gt;</code></pre>
-                        </div>
-                        <div class="td"> 
+        
+                            <p>
+                                Чтобы определить поведение в альтернативном случае, можно использовать оператор else, который выполнится, если выражение в if равно False (ложно).
+                                Так как в else попадают все случаи, когда if был равен False, условие в else не указывается.
+                            </p>
+                            
 <pre tabindex="0" data-lang="Python"><code>if (условие):
     &lt; код &gt;
 else:
     &lt; код &gt;</code></pre>
-                        </div>
-                        <div class="td"> 
+            
+                            <p>
+                                Чтобы определить несколько альтернативных условий, можно использовать блок elif:
+                            </p>
 <pre tabindex="0" data-lang="Python"><code>if (условие):
     &lt; код &gt;
 elif (условие):
     &lt; код &gt;</code></pre>
-                        </div>
-                        <div class="td"> 
-<pre tabindex="0" data-lang="Python"><code>if (условие):
-    &lt; код &gt;
-elif (условие):
-    &lt; код &gt;
-...&lt;elif'ы&gt;...
-else:
-    &lt; код &gt;</code></pre>
+                            <ol>
+                                <li>Сначала python проверит условие в if. Если оно равно True, то выполнится код из блока if.</li>
+                                <li>Если условие равно False, то python проверит условие из следующего elif.</li>
+                                <li>Если оно True, то выполнится блок elif</li>
+                                <li>Если оно False, то проверяются условия из последующих elif (если они есть)</li>
+                                <li>Если ни одно из условий не было истинным, то выполнится код блока else</li>
+                            </ol>
                         </div>
                     </div>
                     <div class="table ex" style="--cols: 4">
@@ -203,27 +359,33 @@ else:
                 <div class="item">
                     <h2>Циклы</h2>
                     <div class="table" style="--cols: 1">
-                        <div class="tch">for</div>
                         <div class="td">
-<pre tabindex="0" data-lang="Python"><code>for &lt;переменная&gt; in &lt;итерируемый объект*&gt;:
-    &lt; код &gt;</code></pre>
+                            <p>
+                                Циклы используются для повторения одного и того же блока кода некоторое количество раз.
+                            </p>
                         </div>
-                        <div class="td text-a-j">
-                            Точное количество выполнений
-                            (длина ит. объекта, диапазон в range и т.д.)
-                            *итерируемый объект - что-то,
-                            что можно перебрать: строка, список, range...
+                        <div class="tch">for</div>
+                        <div class="td mix">
+                            <p>
+                                Используется для перебора элементов итерируемого объекта
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>for &lt;переменная&gt; in &lt;итерируемый объект&gt;:
+    &lt; код &gt;</code></pre>
                         </div>
                     </div>
-
                     <div class="table" style="--cols: 1">
                         <div class="tch">while</div>
-                        <div class="td">
+                        <div class="td mix">
+                            <p>
+                                Используется, когда необходимо выполнение "пока верно условие"
+                            </p>
 <pre tabindex="0" data-lang="Python"><code>while (условие):
     &lt; код &gt;</code></pre>
-                        </div>
-                        <div class="td text-a-j">
-                                Выполнение "пока верно условие", а не точное количество раз
+                            <p>
+                                Пока условие True, цикл продолжает свое выполнение.
+                                
+                                Главное - следить за изменением переменных, иначе можно получить бесконечный цикл
+                            </p>
                         </div>
                     </div>
 
@@ -248,15 +410,19 @@ while n &gt; 0:
                     <div class="table flip" style="--cols: 2">
                         <div class="tch">break</div>
                         <div class="tch">continue</div>
-                        <div class="td text-a-j">
-                            Оператор прерывания цикла</br>
-                            После срабатывания break цикл завершается вне зависимости 
-                            от истинности условия, времени работы и проч.
+                        <div class="td mix">
+                            <p>Оператор прерывания цикла</p>
+                            <p>
+                                После срабатывания break цикл завершается вне зависимости
+                                от истинности условия, времени работы и проч.
+                            </p>
                         </div>
-                        <div class="td text-a-j">
-                            Оператор пропуска итерации</br>
-                            После срабатывания continue данная итерация (прогон) завершается 
-                            и код переходит к следующей
+                        <div class="td mix">
+                            <p>Оператор пропуска итерации</p>
+                            <p>
+                                После срабатывания continue данная итерация (прогон) завершается
+                                и код переходит к следующей
+                            </p>
                         </div>
                     </div>
 
@@ -278,71 +444,319 @@ while n &gt; 0:
                         </div>
                     </div>
 
-                    <div class="table " style="--cols: 1">
+                    <div class="table" style="--cols: 1">
                         <div class="tch">range</div>
-                        <div class="td text-a-j">
-                            Итерируемый объект, создающий набор значений, 
-                            который зависит от переданных аргументов и их количества
-                            </br>
-                            range(b) - создает набор из чисел от 0 до b
-                            </br>
-                            range(a, b) - создает набор из чисел от a до b
-                            </br>
-                            range(a, b, s) - создает набор из чисел от a до b с шагом s                 
+                        <div class="td mix">
+                            <p>
+                                Итерируемый объект, создающий набор значений,
+                                который зависит от переданных аргументов и их количества
+                            </p>
+                            <ul>
+                                <li>range(b) - создает набор из чисел от 0 до b - 1</li>
+                                <li>range(a, b) - создает набор из чисел от a до b - 1</li>
+                                <li>range(a, b, s) - создает набор из чисел от a до b (не включительно) с шагом s</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <h2>
-                        Списки
-                    </h2>
+                    <h2>Списки</h2>
                     <div class="table" style="--cols: 1">
                         <div class="tch">Душность</div>
-                        <div class="td text-a-j"> 
-                            Список - набор или последовательность элементов. 
-                            Для создания списка используются квадратные скобки <b>[]</b>,
-                            внутри которых через запятую перечисляются элементы.
+                        <div class="td mix">
+                            <p>
+                                Список - набор или последовательность элементов.
+                                Для создания списка используются квадратные скобки <b>[]</b>,
+                                внутри которых через запятую перечисляются элементы:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>nums = [1, -3, 42]
+people = ["C#", "Java", "C++", "Python"]</code></pre>
 
-                            nums = [1, -3, 42]
-                            people = ["C#", "Java", "C++", "Python"]
+                            <p>
+                                Для создания пустого списка можно использовать
+                                пустые скобки или функцию list():
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>empty_list = []
+empty_list = list()</code></pre>
 
-                            Для создания пустого списка можно использовать 
-                            пустые скобки или функцию list()
+    <p>В одном списке могут быть объекты разных типов данных</p>
+<pre tabindex="0" data-lang="Python"><code>a = ["Tom", -3.14, 42]</code></pre>
 
-                            empty_list = []
-                            empty_list = list()
-
-                            В одном списке могут быть объекты разных типов данных
-
-                            a = ["Tom", -3.14, 42]
-
-                            Если необходимо создать список, в котором повторяется 
-                            одно и то же значение (или несколько значений), 
-                            то можно использовать звездочку <b>*</b> 
-                            (по сути - это умножение списка на число) 
-
-                            numbers = [2] * 6   # 6 раз повторяем 2
-                            print(numbers)      # [2, 2, 2, 2, 2, 2]
+                            <p>
+                                Если необходимо создать список, в котором повторяется
+                                одно и то же значение (или несколько значений),
+                                то можно использовать звездочку <b>*</b>
+                                (по сути - это умножение списка на число):
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>numbers = [2] * 6   # 6 раз повторяем 2
+print(numbers)      # [2, 2, 2, 2, 2, 2]
 
 
-                            students = ["Bob", "Sam"] * 2   # 2 раза повторяем "Bob", "Sam"
-                            print(students)                 # ["Bob", "Sam", "Bob", "Sam"]
-
+students = ["Bob", "Sam"] * 2   # 2 раза повторяем "Bob", "Sam"
+print(students)                 # ["Bob", "Sam", "Bob", "Sam"]</code></pre>
                         </div>
                         <div class="tch">Работа с элементами</div>
-                        <div class="td text-a-j"> 
-                            Для обращения к конкретному элементу надо использовать индексы -
-                            номера элементов. Они начинаются с нуля. То есть первый элемент 
-                            будет иметь индекс 0, второй - 1, четвертый - 3 и т.д.
+                        <div class="td mix">
+                            <p>
+                                Для обращения к конкретному элементу надо использовать индексы -
+                                номера элементов. Они начинаются с нуля. То есть первый элемент
+                                будет иметь индекс 0, второй - 1, четвертый - 3 и т.д.
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>nums = [0, -17, 8]</code></pre>
 
-                            nums = [0, -17, 8]
-                        
+                            <p>
+                                В данном примере 0 будет иметь индекс 0, -17 - индекс 1
+                                и 8 - индекс 2.
+                                Чтобы обратиться по индексу, необходимо указать название
+                                переменной и индекс в квадратных скобках:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>print(nums[0])    # 0
+print(nums[1])     # -17</code></pre>
+                            <p>
+                                Для обращения к элементам с конца можно использовать отрицательные
+                                индексы, которые будут начинаться с -1 (последний - -1, предпоследний - -2 и т.д.)
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>print(nums[-1])    # 8
+print(nums[-2])    # -17</code></pre>
+
+                            <p>
+                                Кроме получения элемента (например, чтобы вывести через print())
+                                по индексу можно менять элементы:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>nums[1] = -8    # [0, -8, 8]</code></pre>
+                        </div>
+                        <div class="tch">Перебор элементов</div>
+                        <div class="td mix">
+                            <p>
+                                Чтобы посмотреть элементы по порядку или провести с ними какую-либо
+                                другую манипуляцию, их необходимо перебрать по одному. Для этого можно использовать циклы -
+                                как for, так и while.
+                            </p>
+
+                            <p>
+                                Основная идея - перебирать индексы элементов, и уже по ним доставать элементы. Главное -
+                                знать количество элементов в списке. 
+                                Для этого используется функция len(переменная) - возвращает длину списка.
+                                Длина = количество элементов. Последний индекс = len(nums) - 1
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>nums = [1, 3, 5]
+print(len(nums))    # 3</code></pre>
+
+                            <p>Вернемся к перебору:</p>
+<pre tabindex="0" data-lang="Python"><code>nums = [0, -17, 8]
+for i in range(len(nums)):
+    print(nums[i])</code></pre>
+
+                            <p>
+                                В переменную i, которая существует только внутри цикла,
+                                по очереди записываются значения от 0 до длины списка - 1
+                            </p>
+
+                            <p>Или через while:</p>
+<pre tabindex="0" data-lang="Python"><code>nums = [0, -17, 8]
+i = 0
+while i &lt; len(nums):
+    print(nums[i])
+    i += 1    # i = i + 1</code></pre>
+
+                            <p>Также есть еще один способ перебора элементов через цикл for:</p>
+<pre tabindex="0" data-lang="Python"><code>for num in nums:
+    print(num)</code></pre>
+
+                            <p>
+                                Такой вариант дает сам элемент в переменной num, а не его индекс. 
+                                Поэтому для замены элемента чаще используют индексы
+                            </p>
+                        </div>
+                        <div class="tch">Срезы</div>
+                        <div class="td mix">
+                            <p>
+                                Иногда возникает необходимость получить только часть списка. Для этого
+                                существует специальный синтаксис - срезы:
+                            </p>
+                            <p>
+                                nums[start:end:step]: 
+                            </p>
+                            <ul>
+                                <li>
+                                    start: начало, включается
+                                </li>
+                                <li>
+                                    end: конец, не включается
+                                </li>
+                                <li>
+                                    step: шаг, через который будут браться элементы. По умолчанию равен 1
+                                </li>
+                            </ul>
+                            <p>
+                                Немного сокращений:
+                            </p>
+                            <ul>
+                                <li>nums[start:]: от start до конца</li>
+                                <li>nums[:end]: от начала до end</li>
+                                <li>nums[::]: весь список</li>
+                                <li>nums[::-1]: весь список в обратном порядке</li>
+                            </ul>
+<pre tabindex="0" data-lang="Python"><code>nums = [0, 1, 8, -17, 1, -3, 4, 161]
+
+print(nums[:4])       # [0, 1, 8, -17]
+print(nums[1:5])      # [1, 8, -17, 1]
+print(nums[1:6:2])    # [1, -17, -3]</code></pre>
+
+                            <p>Можно использовать и отрицательные индексы:</p>
+<pre tabindex="0" data-lang="Python"><code>print(nums[:-2])      # [0, 1, 8, -17, 1, -3]
+print(nums[-5:])      # [-17, 1, -3, 4, 161]
+print(nums[2:-3])     # [8, -17, 1]
+print(nums[::])       # [0, 1, 8, -17, 1, -3, 4, 161]
+print(nums[::-1])     # [161, 4, -3, 1, -17, 8, 1, 0]</code></pre>                           
+                        </div>
+                        <div class="tch">Методы списков</div>
+                        <div class="td mix">
+                            <p>Списки имеют целый ряд методов для взаимодействия с ними:</p>
+                            <ul>
+                                <li>append(x): добавляет x в конец списка</li>
+                                <li>insert(i, x): добавляет x по индексу i, 
+                                    все после него - сдвигает на одну позицию</li>
+                                <li>clear(): очищает весь список</li>
+                                <li>count(x): возвращает количество вхождений x 
+                                    в список</li>
+                                <li>sort(): сортирует элементы по возрастанию 
+                                    (тут написано, как сортировать по другому правилу)</li>
+                                
+                                <li>remove(x): удаляет первое вхождение x в список</li>
+                                
+                                <li>index(x): возвращает индекс первого вхождения x 
+                                    в список</li>
+                            </ul>
+                            <p>Для вызова одного из этих методов надо поставить точку после имени переменной 
+                                и указать название метода с его аргументами</p>
+                            
+<pre tabindex="0" data-lang="Python"><code>nums = [5, 2, 8, 2]
+
+nums.append(7)
+print(nums)           # [5, 2, 8, 2, 7]
+
+nums.insert(1, 10)
+print(nums)           # [5, 10, 2, 8, 2, 7]
+
+nums.remove(2)
+print(nums)           # [5, 10, 8, 2, 7]
+
+print(nums.index(8))  # 2
+print(nums.count(2))  # 1
+
+nums.sort()
+print(nums)           # [2, 5, 7, 8, 10]
+
+nums.clear()
+print(nums)           # []</code></pre>
+
+                            <p>Помимо них, в язык зашиты встроенные функции для работы со списками:</p>
+                            <ul>
+                                <li>max(), min(): возвращает наибольший/наименьший элемент списка</li>
+                                <li>sorted(list): возвращает отсортированный список</li>
+                                <li>len(): возвращает длину списка</li>
+                            </ul>
+<pre tabindex="0" data-lang="Python"><code>nums = [5, 2, 8, 2]
+
+print(max(nums))      # 8
+print(min(nums))      # 2
+print(sorted(nums))   # [2, 2, 5, 8]
+print(len(nums))      # 4</code></pre>      
+                        </div>
+                        <div class="td mix">
+                            <p>P.S.</p>
+<pre tabindex="0" data-lang="Python"><code>nums.sort()    # меняет список
+sorted(nums)   # создает новый список</code></pre>
+                        </div>
+                        <div class="td mix">
+                            <p>
+                                Если элемента в списке нет, remove и index вызовут ошибку ValueError.
+                                Чтобы этого избежать, можно заранее проверить наличие элемента оператором in.
+                                Он возвращает True или False:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>nums = [5, 2, 8, 2]
+
+print(8 in nums)       # True
+print(7 in nums)       # False
+
+if 7 in nums:
+    nums.remove(7)
+
+if 8 in nums:
+    print(nums.index(8))   # 2</code></pre>
+                        <p>
+                            Обратная проверка записывается как not in: элемента в списке нет
+                        </p>
+<pre tabindex="0" data-lang="Python"><code>print(7 not in nums)   # True</code></pre>
+                        </div>
+                        <div class="tch">Списки списков</div>
+                        <div class="td mix">
+                            <p>
+                                Списки могут состоять из других списков:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>students = [
+    ["Вася", 19],
+    ["Кира", 20],
+    ["Маша", 19],
+    ["Петя", 21]
+]
+
+print(students[0])     # ['Вася', 19]
+print(students[0][0])  # 'Вася'
+print(students[-1][1]) # 21</code></pre>
+
+                            <p>
+                                a[i][j] - j-ый элемент вложенного списка i
+                            </p>
+
+                            <p>
+                                Все взаимодействие с элементами аналогично работе с обычными, одномерными списками.
+                                Также не запрещено иметь внутри списка списки разной длины:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>all_in_one = [
+    [0],
+    ["Вася", "друг Васи"],
+    []
+]</code></pre>
+                        </div>
+                        <div class="td mix">
+                            <p>
+                                P.S. Записывать список можно и в строчку, как одномерный, но данный способ делает содержимое более наглядным
+                            </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+
+
+<!-- 
+TODO: 
+добавить содрежание со ссылками
+
+добавить теорию по двоеточиям (чек-лист), отступам и синтаксису
+
+разница = и ==
+
+добавить:
+строки с методами
+
+словари
+множества
+кортежи
+
+свои функции
+
+библиотеки
+ключи сортировок
+лямбды
+
+вложенные циклы
+
+
+-->
