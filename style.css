@@ -95,7 +95,7 @@ pre {
     padding: 0.3em;
 }
 
-.table:has(pre) {
+.table.ex {
     grid-template-columns: repeat(var(--cols, 4), minmax(min-content, 1fr));
 }
 
