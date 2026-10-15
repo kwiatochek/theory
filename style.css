@@ -55,6 +55,123 @@ h2 {
     left: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+.item,
+.tch {
+    scroll-margin-top: 16px;
+}
+
+.td.mix.toc {
+    --toc-line: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.td.mix.toc ol.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5em;
+    counter-reset: toc;
+}
+
+.td.mix.toc li,
+.td.mix.toc li + li {
+    margin: 0;
+    padding: 0;
+}
+
+.td.mix.toc .toc-sec {
+    counter-increment: toc;
+    display: grid;
+    grid-template-columns: minmax(12em, 16em) minmax(0, 1fr);
+    align-items: center;
+    gap: 0.6em 1em;
+    padding: 0.6em 0.9em;
+    border: 1px solid var(--toc-line);
+    border-radius: 0.5em;
+    background-color: color-mix(in srgb, var(--accent) 6%, transparent);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.td.mix.toc .toc-sec:hover,
+.td.mix.toc .toc-sec:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0.8em color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.td.mix.toc .toc-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: inherit;
+}
+
+.td.mix.toc .toc-main::before {
+    content: counter(toc, decimal-leading-zero);
+    color: var(--accent);
+    font-size: 0.85em;
+}
+
+.td.mix.toc .toc-main:hover {
+    color: var(--accent);
+}
+
+.td.mix.toc ul.toc-sub {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+}
+
+.td.mix.toc .toc-sub a {
+    display: inline-block;
+    padding: 0.15em 0.7em;
+    border: 1px solid var(--toc-line);
+    border-radius: 999px;
+    font-size: 0.85em;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.85;
+    transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.td.mix.toc .toc-sub a:hover {
+    opacity: 1;
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+.td.mix.toc a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+    .td.mix.toc .toc-sec {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .td.mix.toc .toc-sec {
+        transition: none;
+    }
+}
+
 .content {
     max-width: 60em;
     margin: 0 auto;
@@ -287,11 +404,6 @@ h2 {
     }
 }
 
-
-
-
-
-/*   */
 :root {
     --err: #d12b3a;
 }
