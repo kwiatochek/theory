@@ -14,10 +14,8 @@
                     ТЕОРИЯ по python
                 </h1>
                 <div class="item">
+                    <h2>Содержание</h2>
                     <div class="table" style="--cols: 1">
-                        <div class="tch">
-                            <p>Содержание</p>
-                        </div>
                         <div class="td mix toc">
                             <ol class="toc-list">
                                 <li class="toc-sec">
@@ -28,7 +26,7 @@
                                     </ul>
                                 </li>
                                 <li class="toc-sec">
-                                    <a class="toc-main" href="#types">Типы данных</a>
+                                <a class="toc-main" href="#types">Типы данных</a>
                                     <ul class="toc-sub">
                                         <li><a href="#convert">Преобразование типов</a></li>
                                     </ul>
@@ -578,6 +576,34 @@ print(numbers)                   # [2, 2, 2, 2, 2, 2]
 students = ["Bob", "Sam"] * 2    # 2 раза повторяем "Bob", "Sam"
 print(students)                  # ["Bob", "Sam", "Bob", "Sam"]</code></pre>
                         </div>
+                        <div class="tch">Сложение списков</div>
+                        <div class="td mix">
+                            <p>
+                                Списки можно объединять оператором +. Результатом будет новый список,
+                                а исходные списки не изменятся:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>a = [1, 2]
+b = [3, 4]
+c = a + b
+print(c)    # [1, 2, 3, 4]
+print(a)    # [1, 2]</code></pre>
+                            <p>
+                                Складывать можно только списки. Чтобы добавить один элемент,
+                                его нужно обернуть в список:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>nums = [1, 2]
+print(nums + [3])    # [1, 2, 3]</code></pre>
+<pre tabindex="0" data-lang="Python"><code>print(nums + 3)      # ошибка TypeError</code></pre>
+                            <p>
+                                Отличие от append: + создает новый список, а append изменяет существующий:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>nums = [1, 2]
+other = nums + [3]
+print(nums)     # [1, 2]
+print(other)    # [1, 2, 3]
+nums.append(3)
+print(nums)     # [1, 2, 3]</code></pre>
+                        </div>
                         <div class="tch" id="list-items">Работа с элементами</div>
                         <div class="td mix">
                             <p>
@@ -909,7 +935,299 @@ print(pairs)    # [(1, 'a'), (1, 'b'), (2, 'a'), (2, 'b'), (3, 'a'), (3, 'b')]</
                         </div>
                     </div>
                 </div>
-            </div>
+<div class="item">
+    <h2>Строки</h2>
+    <div class="table" style="--cols: 1">
+        <div class="tch">Основы</div>
+        <div class="td mix">
+            <p>
+                Строка (str) - последовательность символов, заключенная в кавычки.
+                Кавычки могут быть как одинарными, так и двойными - главное,
+                чтобы закрывающая была такой же, как открывающая:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "Привет"
+t = 'мир'
+print(s)    # Привет
+print(t)    # мир</code></pre>
+            <p>
+                Длина строки (количество символов, включая пробелы и знаки препинания)
+                определяется функцией len():
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(len("Привет"))   # 6
+print(len("a b"))      # 3</code></pre>
+            <p>Для объединения строк используется оператор +, для повторения - *:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "Привет"
+t = "мир"
+print(s + ", " + t)   # Привет, мир
+print(t * 3)          # миримирмир</code></pre>
+            <p>
+                Оператор + работает только со строками. Чтобы присоединить число,
+                его нужно сначала преобразовать функцией str():
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>age = 16
+print("Возраст: " + str(age))   # Возраст: 16</code></pre>
+<pre tabindex="0" data-lang="Python" data-run><code>print("Возраст: " + age)        # ошибка TypeError</code></pre>
+        </div>
+
+        <div class="tch">Индексы и срезы</div>
+        <div class="td mix">
+            <p>
+                Обращение к символам по индексу (с нуля, отрицательные индексы - с конца)
+                и срезы работают так же, как в списках (см. раздел «Списки»).
+                Результатом среза будет новая строка:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "программа"
+print(s[0])      # п
+print(s[-1])     # а
+print(s[2:5])    # огр
+print(s[::-1])   # аммаргорп</code></pre>
+            <p>
+                Обращение по несуществующему индексу вызывает ошибку,
+                а срез, выходящий за границы строки, просто обрежется:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(s[5:100])   # амма</code></pre>
+<pre tabindex="0" data-lang="Python" data-run><code>print(s[100])     # ошибка IndexError</code></pre>
+        </div>
+
+        <div class="tch">Перебор</div>
+        <div class="td mix">
+            <p>
+                Строка - итерируемый объект, поэтому ее можно перебирать циклом for -
+                либо по индексам, либо сразу по символам:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "abc"
+for i in range(len(s)):
+    print(s[i])
+
+for ch in s:
+    print(ch)</code></pre>
+            <p>Например, подсчет символов определенного вида:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "banana"
+cnt = 0
+for ch in s:
+    if ch == "a":
+        cnt += 1
+print(cnt)   # 3</code></pre>
+        </div>
+
+        <div class="tch">Поиск и подсчет</div>
+        <div class="td mix">
+            <ul>
+                <li>count(x): возвращает количество вхождений подстроки x в строку</li>
+                <li>find(x): возвращает индекс первого вхождения x, а если его нет - -1</li>
+                <li>rfind(x): возвращает индекс последнего вхождения x, а если его нет - -1</li>
+                <li>index(x): работает как find, но если подстроки нет - вызывает ошибку (ValueError)</li>
+                <li>x in s: проверяет, есть ли подстрока x в строке (True / False)</li>
+            </ul>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "abracadabra"
+print(s.count("a"))      # 5
+print(s.find("bra"))     # 1
+print(s.rfind("bra"))    # 8
+print(s.find("z"))       # -1
+print("cad" in s)        # True</code></pre>
+            <p>Отличие find от index - в поведении, когда подстроки нет:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print("abc".find("z"))     # -1</code></pre>
+<pre tabindex="0" data-lang="Python"><code>print("abc".index("z"))    # ошибка ValueError</code></pre>
+            <p>
+                count считает только непересекающиеся вхождения. Чтобы посчитать все,
+                в том числе пересекающиеся, нужно перебирать срезы:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "aaaa"
+print(s.count("aa"))     # 2
+
+cnt = 0
+for i in range(len(s) - 1):
+    if s[i:i + 2] == "aa":
+        cnt += 1
+print(cnt)               # 3</code></pre>
+        </div>
+
+        <div class="tch">Замена и очистка</div>
+        <div class="td mix">
+            <ul>
+                <li>replace(a, b): заменяет все вхождения подстроки a на b. Необязательный третий аргумент - максимальное количество замен</li>
+                <li>strip(): удаляет пробелы и переносы строк в начале и в конце строки. lstrip() удаляет только слева, rstrip() - только справа</li>
+                <li>strip(chars): удаляет в начале и в конце любые символы из chars</li>
+            </ul>
+<pre tabindex="0" data-lang="Python" data-run><code>t = "abababab"
+print(t.replace("ab", "X"))       # XXXX
+print(t.replace("ab", "X", 2))    # XXabab</code></pre>
+            <p>Замена идет слева направо, заменяемые вхождения не пересекаются:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print("aaa".replace("aa", "b"))   # ba</code></pre>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "  hello world  "
+print("[" + s.strip() + "]")     # [hello world]
+print("[" + s.lstrip() + "]")    # [hello world  ]
+print("[" + s.rstrip() + "]")    # [  hello world]
+print("xxabcxx".strip("x"))      # abc</code></pre>
+        </div>
+
+        <div class="tch">split и join</div>
+        <div class="td mix">
+            <ul>
+                <li>split(sep): разбивает строку на список подстрок по разделителю sep. Без аргумента разделителем считаются любые пробельные символы</li>
+                <li>sep.join(список): объединяет строки из списка в одну, вставляя sep между ними</li>
+            </ul>
+<pre tabindex="0" data-lang="Python" data-run><code>words = "красный жёлтый зелёный".split()
+print(words)                    # ['красный', 'жёлтый', 'зелёный']
+print("2026-06-08".split("-"))  # ['2026', '06', '08']
+print("-".join(words))          # красный-жёлтый-зелёный</code></pre>
+        </div>
+
+        <div class="tch">sorted</div>
+        <div class="td mix">
+            <p>
+                Функция sorted() для строки возвращает список символов (а не строку),
+                упорядоченных по кодам. Чтобы получить строку, список нужно объединить через join:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "banana"
+print(sorted(s))                          # ['a', 'a', 'a', 'b', 'n', 'n']
+print("".join(sorted(s)))                 # aaabnn
+print("".join(sorted(s, reverse=True)))   # nnbaaa</code></pre>
+            <p>Коды заглавных букв меньше кодов строчных, поэтому они идут раньше:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(sorted("aBcA"))   # ['A', 'B', 'a', 'c']</code></pre>
+        </div>
+
+        <div class="tch">Регистр, проверки, коды символов</div>
+        <div class="td mix">
+            <ul>
+                <li>upper(), lower(): переводят строку в верхний / нижний регистр</li>
+                <li>isdigit(): проверяет, что все символы - цифры. isalpha(): проверяет, что все символы - буквы</li>
+                <li>startswith(x), endswith(x): проверяют, начинается / заканчивается ли строка на x</li>
+                <li>ord(c): возвращает код символа. chr(n): возвращает символ по коду</li>
+            </ul>
+<pre tabindex="0" data-lang="Python" data-run><code>print("Hello".upper())         # HELLO
+print("123".isdigit())         # True
+print("abc".startswith("ab"))  # True
+print(ord("A"))                # 65
+print(chr(66))                 # B
+print(chr(ord("a") + 1))       # b</code></pre>
+        </div>
+        <div class="td mix">
+            <p>P.S. Строки сравниваются посимвольно, по кодам символов:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print("Z" &lt; "a")     # True
+print("10" &lt; "9")    # True</code></pre>
+        </div>
+
+        <div class="tch">f-строки</div>
+        <div class="td mix">
+            <p>
+                f-строки позволяют вставлять значения переменных и выражений прямо в строку.
+                Перед открывающей кавычкой ставится буква f, а подставляемые значения
+                записываются в фигурных скобках:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>name = "Вася"
+age = 16
+print(f"Меня зовут {name}, мне {age} лет")   # Меня зовут Вася, мне 16 лет</code></pre>
+            <p>
+                Внутри скобок может быть любое выражение: арифметика, вызов функции или метода,
+                обращение по индексу:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>a = 2
+b = 3
+print(f"{a} + {b} = {a + b}")           # 2 + 3 = 5
+
+name = "вася"
+print(f"{name.upper()} {len(name)}")    # ВАСЯ 4
+print(f"{name[0]}{name[-1]}")           # вя</code></pre>
+            <p>
+                Кавычки внутри скобок должны отличаться от тех, которыми обрамлена сама f-строка:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(f"{'abc'.upper()}")   # ABC</code></pre>
+            <p>
+                Для вывода переменных вместе с текстом есть три способа. Результат у них одинаковый,
+                но + требует ручного преобразования типа, а запятая в print всегда добавляет пробел:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>age = 16
+print("Возраст: " + str(age))   # Возраст: 16
+print("Возраст:", age)          # Возраст: 16
+print(f"Возраст: {age}")        # Возраст: 16</code></pre>
+<pre tabindex="0" data-lang="Python" data-run><code>print("Возраст: " + age)        # ошибка TypeError</code></pre>
+        </div>
+        <div class="td mix">
+            <p>
+                После двоеточия внутри скобок задается формат. Например, :.2f - вещественное число
+                с двумя знаками после запятой (округление выполняется автоматически):
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>x = 3.14159
+print(f"{x:.2f}")   # 3.14
+print(f"{x:.1f}")   # 3.1
+print(f"{x:.0f}")   # 3</code></pre>
+            <p>
+                Число задает ширину поля, а символы &lt;, &gt; и ^ - выравнивание
+                по левому краю, правому и по центру. Для строк по умолчанию выравнивание
+                левое, для чисел - правое:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(f"[{'ab':&lt;5}]")    # [ab   ]
+print(f"[{'ab':&gt;5}]")   # [   ab]
+print(f"[{'ab':^6}]")   # [  ab  ]
+print(f"[{7:5}]")       # [    7]</code></pre>
+            <p>Ноль перед шириной дополняет число нулями слева:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(f"{7:03}")          # 007
+print(f"{5:02}:{9:02}")   # 05:09</code></pre>
+            <p>Чтобы вывести саму фигурную скобку, ее нужно удвоить:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(f"{{x}} = {5}")   # {x} = 5</code></pre>
+        </div>
+    </div>
+
+    <div class="table" style="--cols: 1">
+        <div class="tch">Строки неизменяемы</div>
+        <div class="td mix">
+            <p>В отличие от списка, элемент строки нельзя изменить по индексу:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>nums = [1, 2, 3]
+nums[0] = 9
+print(nums)      # [9, 2, 3]</code></pre>
+<pre tabindex="0" data-lang="Python"><code>s = "abc"
+s[0] = "X"       # ошибка TypeError</code></pre>
+            <p>
+                Методы строк не изменяют исходную строку, а возвращают новую,
+                поэтому результат нужно сохранять в переменную:
+            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "abc"
+s.replace("a", "X")
+print(s)         # abc
+s = s.replace("a", "X")
+print(s)         # Xbc</code></pre>
+            <p>Заменить символ по индексу можно, собрав новую строку из срезов:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>s = "abc"
+s = s[:1] + "X" + s[2:]
+print(s)         # aXc</code></pre>
+            <p>Оператор in для строки проверяет наличие подстроки, а для списка - наличие элемента:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print("a" in "cabd")         # True
+print("ab" in "cabd")        # True
+print("a" in ["ab", "cd"])   # False</code></pre>
+        </div>
+    </div>
+
+    <div class="table fit" style="--cols: 3">
+        <div class="tch">Действие</div>
+        <div class="tch">Список</div>
+        <div class="tch">Строка</div>
+
+        <div class="trh">Изменить элемент</div>
+        <div class="td">nums[0] = 9 работает</div>
+        <div class="td">s[0] = "X" - ошибка</div>
+
+        <div class="trh">Методы</div>
+        <div class="td">меняют сам список (append, sort)</div>
+        <div class="td">возвращают новую строку, исходная не меняется</div>
+
+        <div class="trh">sorted(x)</div>
+        <div class="td">список</div>
+        <div class="td">тоже список, а не строка</div>
+
+        <div class="trh">x in y</div>
+        <div class="td">есть ли элемент</div>
+        <div class="td">есть ли подстрока</div>
+
+        <div class="trh">+</div>
+        <div class="td">список + список, получается новый список</div>
+        <div class="td">строка + строка, получается новая строка</div>
+
+        <div class="trh">Состоит из</div>
+        <div class="td">любых объектов</div>
+        <div class="td">только символов</div>
+    </div>
+</div>
         </div>
     </div>
     <script src="run.js" defer></script>
@@ -920,10 +1238,8 @@ print(pairs)    # [(1, 'a'), (1, 'b'), (2, 'a'), (2, 'b'), (3, 'a'), (3, 'b')]</
 
 <!-- 
 TODO: 
-добавить содрежание со ссылками
-
 добавить:
-строки с методами
+библиотеки (math, itertools)
 
 словари
 множества
@@ -931,7 +1247,7 @@ TODO:
 
 свои функции
 
-библиотеки
+
 ключи сортировок
 лямбды
 
