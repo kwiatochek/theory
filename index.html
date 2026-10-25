@@ -54,6 +54,7 @@
                                     <a class="toc-main" href="#lists">Списки</a>
                                     <ul class="toc-sub">
                                         <li><a href="#list-create">Создание</a></li>
+                                        <li><a href="#list-add">Сложение</a></li>
                                         <li><a href="#list-items">Элементы</a></li>
                                         <li><a href="#list-iter">Перебор</a></li>
                                         <li><a href="#slices">Срезы</a></li>
@@ -75,6 +76,13 @@
                                         <li><a href="#strings-case">Регистр и проверки</a></li>
                                         <li><a href="#strings-f">f-строки</a></li>
                                         <li><a href="#strings-immutable">Неизменяемость</a></li>
+                                    </ul>
+                                </li>
+                                <li class="toc-sec">
+                                    <a class="toc-main" href="#functions">Функции</a>
+                                    <ul class="toc-sub">
+                                        <li><a href="#func-syntax">Синтаксис</a></li>
+                                        <li><a href="#func-return">return</a></li>
                                     </ul>
                                 </li>
                             </ol>
@@ -591,7 +599,7 @@ print(numbers)                   # [2, 2, 2, 2, 2, 2]
 students = ["Bob", "Sam"] * 2    # 2 раза повторяем "Bob", "Sam"
 print(students)                  # ["Bob", "Sam", "Bob", "Sam"]</code></pre>
                         </div>
-                        <div class="tch">Сложение списков</div>
+                        <div class="tch" id="list-add">Сложение списков</div>
                         <div class="td mix">
                             <p>
                                 Списки можно объединять оператором +. Результатом будет новый список,
@@ -1243,6 +1251,82 @@ print("a" in ["ab", "cd"])   # False</code></pre>
                         <div class="td">только символов</div>
                     </div>
                 </div>
+                
+                <div class="item" id="functions">
+                    <h2>Функции</h2>
+                    <div class="table" style="--cols: 1">
+                        <div class="tch" id="func-syntax">Синтаксис</div>
+                        <div class="td mix">
+                            <p>
+                                Функция - фрагмент кода со своим именем, который можно использовать много раз.
+                            </p>
+                            <p>
+                                В питоне всего чуть более 70 (версия 3.15) встроенных функций (print, int, input...), поэтому
+                                для реализации своих сценариев надо писать свои функции:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>def название(параметры):
+    тело_функции</code></pre>
+                            <ul>
+                                <li>название - "имя", по которому обращаемся к функции</li>
+                                <li>параметры - значения, которые подаются функции (их может не быть)</li>
+                                <li>тело_функции - инструкции и команды, которые выполняются при вызове функции</li>
+                            </ul>
+<pre tabindex="0" data-lang="Python" data-run><code>def draw_box():
+    for i in range(5):
+        print('*' * 7)
+draw_box()</code></pre>
+                            <p>
+                                Эта функция рисует прямоугольник фиксированного размера - 5 x 7.
+                                Чтобы размеры были произвольными, можно передать в функцию две переменные -
+                                h и w (они будут называться аргументами):
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def draw_box(h, w):
+    for i in range(h):
+        print('*' * w)
+draw_box(5, 2)
+print("\n")
+draw_box(2, 5)</code></pre>
+                            <p>
+                                Порядок значений будет сохранен - в какой последовательности передали, в такой и будут записаны в переменные.
+                            </p>
+                        </div>
+                        <div class="tch" id="func-return">return</div>
+                        <div class="td mix">
+                            <p>
+                                Функции могут возвращать значения. Это точно такая же функция, как и не возвращающая ничего,
+                                однако после своего завершения она оставляет память о себе в виде нужного значения.
+                            </p>
+                            <p>
+                                В таких функциях пишется слово return, после которого без скобочек идет результат.
+                            </p>
+                            <p>
+                                Например, функция, которая возвращает значения многочлена x² + 2x - 5:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def f(x):
+    return x ** 2 + 2 * x - 5
+
+print(f(4))    # 19</code></pre>
+                            <p>
+                                Результат такой функции можно использовать в программе для присвоения
+                                значений переменным:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def f(x):
+    return x ** 2 + 2 * x - 5
+
+a = f(4)
+b = f(8)
+print(a * b)    # 1425</code></pre>
+                        </div>
+                        <div class="td mix">
+                            <p>
+                                P.S. после выполнения return функция сразу завершится, и все оставшиеся команды не будут выполнены.
+                            </p>
+                            <p>
+                                P.P.S. функция может возвращать значение любого типа - хоть строка, хоть True/False. Для возврата нескольких значений надо указать их через запятую.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1261,10 +1345,7 @@ TODO:
 множества
 кортежи
 
-свои функции
 
-
-ключи сортировок
 лямбды
 
 -->
