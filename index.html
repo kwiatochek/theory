@@ -83,6 +83,9 @@
                                     <ul class="toc-sub">
                                         <li><a href="#func-syntax">Синтаксис</a></li>
                                         <li><a href="#func-return">return</a></li>
+                                        <li><a href="#func-default">Параметры по умолчанию</a></li>
+                                        <li><a href="#func-named">Именованные аргументы</a></li>
+                                        <li><a href="#func-args">*args</a></li>
                                     </ul>
                                 </li>
                             </ol>
@@ -1251,7 +1254,6 @@ print("a" in ["ab", "cd"])   # False</code></pre>
                         <div class="td">только символов</div>
                     </div>
                 </div>
-                
                 <div class="item" id="functions">
                     <h2>Функции</h2>
                     <div class="table" style="--cols: 1">
@@ -1325,6 +1327,166 @@ print(a * b)    # 1425</code></pre>
                                 P.P.S. функция может возвращать значение любого типа - хоть строка, хоть True/False. Для возврата нескольких значений надо указать их через запятую.
                             </p>
                         </div>
+                        <div class="tch" id="func-default">Параметры по умолчанию</div>
+                        <div class="td mix">
+                            <p>
+                                Параметру можно задать значение по умолчанию. Если при вызове соответствующий
+                                аргумент не передан, будет использовано это значение:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def greet(name, greeting="Привет"):
+    print(greeting + ", " + name)
+
+greet("Вася")                 # Привет, Вася
+greet("Вася", "Здравствуй")   # Здравствуй, Вася</code></pre>
+                            <p>Параметры со значением по умолчанию должны идти после обычных параметров:</p>
+<pre tabindex="0" data-lang="Python"><code>def greet(greeting="Привет", name):    # ошибка SyntaxError
+    print(greeting + ", " + name)</code></pre>
+                        </div>
+                        <div class="td mix">
+                            <p>P.S. Значением по умолчанию не стоит делать список: он создается один раз и сохраняется между вызовами.</p>
+<pre tabindex="0" data-lang="Python" data-run><code>def add(x, lst=[]):
+    lst.append(x)
+    return lst
+
+print(add(1))    # [1]
+print(add(2))    # [1, 2]</code></pre>
+                            <p>Вместо списка передают None и создают список внутри функции:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>def add(x, lst=None):
+    if lst is None:
+        lst = []
+    lst.append(x)
+    return lst
+
+print(add(1))    # [1]
+print(add(2))    # [2]</code></pre>
+                        </div>
+                        <div class="tch" id="func-named">Именованные аргументы</div>
+                        <div class="td mix">
+                            <p>
+                                При вызове значения можно передавать не по порядку, а по имени параметра - в виде имя=значение.
+                                Такие аргументы называются именованными:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def power(x, n=2):
+    return x ** n
+
+print(power(3))          # 9
+print(power(3, 3))       # 27
+print(power(n=3, x=2))   # 8
+print(power(2, n=5))     # 32</code></pre>
+                            <p>Именованные аргументы можно сочетать с обычными, но обычные должны идти первыми:</p>
+<pre tabindex="0" data-lang="Python"><code>print(power(x=2, 3))    # ошибка SyntaxError</code></pre>
+                            <p>Одному параметру нельзя передать значение дважды - и по порядку, и по имени:</p>
+<pre tabindex="0" data-lang="Python"><code>print(power(2, x=3))    # ошибка TypeError</code></pre>
+                            <p>Именно так работают sep и end у print и reverse у sorted и sort:</p>
+<pre tabindex="0" data-lang="Python" data-run><code>print(1, 2, 3, sep="-", end="!")    # 1-2-3!</code></pre>
+<pre tabindex="0" data-lang="Python" data-run><code>nums = [5, 2, 8]
+print(sorted(nums, reverse=True))    # [8, 5, 2]</code></pre>
+                        </div>
+                        <div class="tch" id="func-args">*args</div>
+                        <div class="td mix">
+                            <p>
+                                Если заранее неизвестно, сколько значений будет передано в функцию, перед именем параметра
+                                ставится звездочка. Все переданные значения попадут в этот параметр в виде кортежа
+                                (последовательность, похожая на список, но неизменяемая):
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def show(*args):
+    print(args)
+
+show(1, 2, 3)     # (1, 2, 3)
+show("a", "b")    # ('a', 'b')
+show()            # ()</code></pre>
+                            <p>
+                                С args можно работать как со списком: перебирать циклом, брать элементы по индексу,
+                                узнавать длину через len():
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def my_sum(*args):
+    total = 0
+    for x in args:
+        total += x
+    return total
+
+print(my_sum(1, 2, 3))    # 6
+print(my_sum(10))         # 10
+print(my_sum())           # 0</code></pre>
+                            <p>
+                                Обычные параметры можно использовать вместе с *args, но они должны идти перед ним:
+                            </p>
+<pre tabindex="0" data-lang="Python" data-run><code>def info(name, *args):
+    print(name, len(args))
+
+info("Вася", 1, 2, 3)    # Вася 3</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item" id="libraries">
+                    <div class="table" style="--cols: 1">
+                        <div class="tch">Библиотеки</div>
+                        <div class="td mix">
+                            <p>
+                                Код, написанный другими людьми за нас. Для использования библиотеки необходимо попросить питон "достать" ее:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>import название_библиотеки</code></pre>
+                            <p>
+                                После этого можно использовать все функции и переменные данной библиотеки:
+                            </p>
+<pre tabindex="0" data-lang="Python"><code>...
+название_библиотеки.функция(аргументы)
+...
+</code></pre>
+                        </div>
+                    </div>
+                    <div class="table fit" style="--cols: 2">
+                        <div class="tch">math</div>
+                        <div class="tch">itertools</div>
+                        <div class="td mix">
+                            <p>
+                                Сложные математические функции:
+                            </p>
+                            <ul>
+                                <li>log2(x) - логарифм по основанию 2 от x</li>
+                                <li>log(x) - логарифм по основанию 10 от x</li>
+                                <li>ceil(x) - округление вверх</li>
+                                <li>floor(x) - округление вниз</li>
+                                <li>sqrt(x) - квадратный корень (== x ** 0.5)</li>
+                                <li>exp(x) - e в степени x</li>
+                                <li>factorial(x) - факториал числа x</li>
+                                <li>dist(x, y) - расстояние между точками с координатами x и y</li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                        <div class="td mix">
+                            <p>
+                                Инструменты для работы с итераторами и циклами
+                            </p>
+                            <ul>
+                                <li>product(последовательность, repeat=n) - все комбинации элементов последовательности длиной n</li>
+                                <li>permutations(последовательность) - все перествновки элементов последовательности</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="table fit" style="--cols: 2">
+                        <div class="tch">functools</div>
+                        <div class="tch">string</div>
+
+                        <div class="td mix">
+                            <p>
+                                Работа с функциями
+                            </p>
+                            <ul>
+                                <li>@lru_cache(None) - директива для кеширования 
+                                    (сохранения в оперативной памяти) результатов функции</li>
+                            </ul>
+                        </div>
+                        <div class="td mix">
+                            <p>
+                                Работа со строками
+                            </p>
+                            <ul>
+                                <li>printable - переменная, хранящая основные символы. 
+                                    Через срез до n можно получить алфавит n-ичной системы счисления</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1338,14 +1500,9 @@ print(a * b)    # 1425</code></pre>
 
 <!-- 
 TODO: 
-добавить:
-библиотеки (math, itertools)
-
 словари
 множества
 кортежи
 
-
 лямбды
-
 -->
